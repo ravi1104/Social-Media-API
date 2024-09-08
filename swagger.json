@@ -7,7 +7,7 @@
     },
     "servers": [
         {
-            "url": "https://frail-life-jacket-frog.cyclic.app/api"
+            "url": "https://social-media-api-houd.onrender.com/api/"
         }
     ],
     "components": {

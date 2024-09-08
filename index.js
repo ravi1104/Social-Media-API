@@ -34,7 +34,7 @@ app.use("/api/friend",friendRouter);
 app.use("/api/comment",commentRouter);
 
 app.get('*', (req, res) => {
-    res.send('Invalid URL');
+    res.status(400).send('Invalid URL');
 });
 
 
