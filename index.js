@@ -1,7 +1,7 @@
 import express from "express";
 import userRouter from "./src/features/user/user.routes.js";
 import cookieParser from "cookie-parser";
-
+import cors from 'cors';
 import swagger from 'swagger-ui-express';
 
 import { appLevelErrorHandler } from "./src/middlewares/errorHandler.js";
