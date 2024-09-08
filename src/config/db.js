@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
-const baseUrl = "mongodb+srv://ravi:4298@atlascluster.tlcgbgf.mongodb.net/socialMedia?retryWrites=true&w=majority";
-
+//const baseUrl = process.env.MONGODB || "0.0.0.0:27017";
+const uri = "mongodb+srv://ravi:4298@atlascluster.tlcgbgf.mongodb.net/socialMedia?retryWrites=true&w=majority";
 export const connectToDb = async () => {
   try {
-    await mongoose.connect(baseUrl, {
+    await mongoose.connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

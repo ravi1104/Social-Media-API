@@ -1,0 +1,487 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "description": "Social Media Backend REST-API that empowers users to post, comment, like, send friend Request and reset their passwords using OTP for enhanced security",
+        "title": "Social Media API"
+    },
+    "servers": [
+        {
+            "url": "https://frail-life-jacket-frog.cyclic.app/api"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "JWT": {
+                "in": "header",
+                "name": "Authorization",
+                "type": "apiKey"
+            }
+        }
+    },
+    "paths": {
+        "/user/register": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Register user",
+                "description": "Allows a users to register with username and password",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "gender": {
+                                        "type": "ENUM"
+                                    }
+                                },
+                                "required": [
+                                    "username",
+                                    "password",
+                                    "gender"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User registered successfully"
+                    }
+                }
+            }
+        },
+        "/user/login": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "User login",
+                "description": "Returns JWT token for authentication",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "email",
+                                    "password"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "JWT token generated successfully"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/user/logoutalldevices": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "User logoutalldevices",
+                "description": "Removes JWT token for authentication",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "email",
+                                    "password"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Logout successful"
+                    },
+                    "401": {
+                        "description": "Unauthorized Login to continue"
+                    }
+                }
+            }
+        },
+        "/user/resetPass": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "User Reset pass",
+                "description": "Rest password using OTP to email id",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {},
+                                "required": [
+                                    ""
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OTP sent successfully to registered email if valid"
+                    },
+                    "401": {
+                        "description": "Unauthorized Login to continue"
+                    }
+                }
+            }
+        },
+        "/post/newPost": {
+            "post": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "add imgurl caption",
+                "description": "Cdd img usrl aption",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "image": "http://www.abc.com",
+                                    "caption": "caption"
+                                },
+                                "required": [
+                                    "image",
+                                    "caption"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Password Reset successful"
+                    }
+                }
+            }
+        },
+        "/post/addPost": {
+            "post": {
+              "tags": ["Post"],
+              "summary": "Add a Post",
+              "description": "Add a new post with image URL and caption",
+              "requestBody": {
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "image": "http://www.abc.com",
+                        "caption": "caption"
+                      },
+                      "required": ["image", "caption"]
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "200": {
+                  "description": "Post added successfully"
+                }
+              }
+            }
+          },
+          "/post/updatePost/{postId}": {
+            "put": {
+              "tags": ["Post"],
+              "summary": "Update a Post",
+              "description": "Update an existing post with image URL and caption",
+              "parameters": [
+                {
+                  "name": "postId",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                    "type": "string"
+                  },
+                  "description": "Post ID"
+                }
+              ],
+              "requestBody": {
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "image": "http://www.abc.com",
+                        "caption": "caption"
+                      },
+                      "required": ["image", "caption"]
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "200": {
+                  "description": "Post updated successfully"
+                }
+              }
+            }
+          },
+          "/post/deletePost/{postId}": {
+            "delete": {
+              "tags": ["Post"],
+              "summary": "Delete a Post",
+              "description": "Delete an existing post",
+              "parameters": [
+                {
+                  "name": "postId",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                    "type": "string"
+                  },
+                  "description": "Post ID"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Post deleted successfully"
+                }
+              }
+            }
+          },
+          
+        "/like/like/{postId}": {
+            "post": {
+                "tags": [
+                    "Like"
+                ],
+                "summary": "Like a Post",
+                "description": "Like a post using the postId",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "postId": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "postId"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Post liked successfully"
+                    },
+                    "401": {
+                        "description": "Not a valid user"
+                    }
+                }
+            }
+        },
+        "/like/like/{commentId}": {
+            "post": {
+                "tags": [
+                    "Like"
+                ],
+                "summary": "Like a Comment",
+                "description": "Like a comment using the commentId",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "commentId": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "comment"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Comment liked successfully"
+                    },
+                    "401": {
+                        "description": "Not a valid user"
+                    }
+                }
+            }
+        },
+        "/comment/comment/{postId}": {
+            "post": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Add a comment to a Post",
+                "description": "Add a comment to a post using the postId",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "postId": {
+                                        "type": "string"
+                                    },
+                                    "comment": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "postId",
+                                    "comment"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Comment added successfully"
+                    }
+                }
+            }
+        },
+        "/comment/delete/{commentId}": {
+            "delete": {
+              "tags": [
+                "Comments"
+              ],
+              "summary": "Delete a Comment",
+              "description": "Delete a comment using the commentId",
+              "parameters": [
+                {
+                  "name": "commentId",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                    "type": "string"
+                  },
+                  "description": "Comment ID"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Comment deleted successfully"
+                }
+              }
+            }
+          },
+          
+        "/friend/sendRequest": {
+            "post": {
+                "tags": [
+                    "Friend Requests"
+                ],
+                "summary": "Send a Friend Request",
+                "description": "Send a friend request to another user using their friendId",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "friendId": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "friendId"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Friend request sent successfully"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/friend/approveRequest": {
+            "post": {
+                "tags": [
+                    "Friend Requests"
+                ],
+                "summary": "Approve a Friend Request",
+                "description": "Approve a friend request using the friendId",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "friendId": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "friendId"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Friend request approved successfully"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        }
+    }
+}
